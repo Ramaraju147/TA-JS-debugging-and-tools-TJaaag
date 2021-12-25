@@ -10,14 +10,14 @@ function getFullName(firstName, lastName) {
 
 let expectedResult = "Rama Raju";
 
-if (expectedResult === getFullName("Rama", "Raju")) {
-  console.log("Success");
-} else {
+if(expectedResult == getFullName("Rama","Raju")){
+  console.log("Success")
+}else{
   throw new Error();
 }
 
-if (expectedResult === getFullName("Ram", "Raju")) {
-  console.log("Success");
-} else {
+if(expectedResult == getFullName("Ram","Raju")){
+  console.log("Success")
+}else{
   throw new Error();
 }
