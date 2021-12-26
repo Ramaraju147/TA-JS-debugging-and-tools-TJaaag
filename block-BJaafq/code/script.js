@@ -16,50 +16,55 @@
 // 3. Throw an error when the arguments passed in not a number.
 // 4. Make second test fail and see if the
 
-function test(message, callback) {
-  try {
-    callback();
-    console.log("✔️", message);
-  } catch (error) {
-    console.log("❌", message, error);
+function test(message,cb){
+  try{
+    cb()
+    console.log("Passed",message)
+  }catch(error){
+    console.log("Failed",error)
   }
 }
 
-function expect(actual) {
+function expect(result){
   return {
-    isEqual: function (expected) {
-      if (actual !== expected) {
-        throw new Error(`${actual} is not equal to ${expected}`);
+    toEqual : (expected) => {
+      if(result !== expected){
+        throw new Error(`${result} is not equal to ${expected}`)
       }
     },
-    isTypeOf: function (expected) {
-      if (actual !== expected) {
-        throw new Error(`${actual} is not type of ${expected}`);
+    toBeEqual: (result) => {
+      if(typeof(result) !== expectedType){
+        console.log(result,expectedType )
+        throw new Error(`${result} is not of type ${expectedType}`)
       }
-    },
-  };
+    }
+  }
 }
 
-function addTwoNumbers(a, b) {
-  return a + b;
+
+function add(numA,numB){
+  return numA+numB;
 }
 
-function multiplyTwoNumbers(a, b) {
-  return a * b;
+function multiplication(numA,numB){
+  return numA*numB;
 }
 
-function testAdd() {
-  result = addTwoNumbers(1, 3);
-  expected = 4;
-  expect(result).isEqual(expected);
-  expect(typeof result).isTypeOf("number");
+function testAdd(){
+   result = add(5,6);
+   expected = 11;
+   expectedType = "number";
+  expect(result).toEqual(expected);
+  expect(result).toBeEqual(expectedType);
 }
 
-function testmultiply() {
-  result = multiplyTwoNumbers(2, 3);
-  expected = 7;
-  expect(result).isEqual(expected);
+test("Add 5 and 6", testAdd);
+
+
+function testMultiplication(){
+   result = multiplication(2,3);
+   expected = 6;
+  expect(result).toEqual(expected);
 }
 
-test("Add two Numbers", testAdd);
-test("Multiply two Numbers", testmultiply);
+test("Multiply  2 and 3", testMultiplication);
